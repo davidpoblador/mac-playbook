@@ -1,0 +1,23 @@
+- hosts: mac
+  vars:
+    - computername: nirvanis
+  roles:
+    - osx-computername
+  tasks:
+  - name: cask-versions tap
+    homebrew_tap:
+      name: homebrew/cask-versions
+
+  - name: homebrew
+    homebrew:
+      name:
+        - mas
+      state: latest
+
+  - name: cask
+    homebrew_cask:
+      name: "{{item}}"
+      state: latest
+    with_items:
+      - spotify
+      - steam
